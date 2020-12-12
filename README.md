@@ -325,7 +325,7 @@ g++ -DDEBUG log.cc
 **决定可执行程序功能的是经过预处理阶段之后那部分代码**
 
 ### 7.简单测试框架实现
-#### EXPECT系列封装实现
+#### 7.1 EXPECT系列封装实现
 实现如下EXPECT系列
 ```c++
 TEST(test, add1) {
@@ -377,7 +377,7 @@ TEST(test, add1) {
 #define EXPECT_GT(a, b) EXPECT(a, >, b)
 #define EXPECT_GE(a, b) EXPECT(a, >=, b)
 ```
-#### COLOR封装实现
+#### 7.2 COLOR封装实现
 同理两组实现颜色显示
 
 冗余的实现，不够优雅
@@ -400,7 +400,7 @@ TEST(test, add1) {
 #define BLUE(msg)   COLOR(msg, 34) 
 ```
 
-#### 使用__attribute__ 完成函数注册功能
+#### 7.3 使用__attribute__ 完成函数注册功能
 
 **构造函数会先于主函数执行**
 ```c++
@@ -418,7 +418,7 @@ int main() {
 }
 ```
 
-#### TEST与RUN_ALL_TESTS的实现
+#### 7.4 TEST与RUN_ALL_TESTS的实现
 ```c++
 #define TEST(a, b)  \
 // 这里要声明一下
@@ -457,7 +457,7 @@ int RUN_ALL_TESTS() {
 上班TEST的替换之后的代码，方便理解
 ![](./pictures/19.png)
 
-RUN_ALL_TESTS简单的就是先开辟一块内存，存放这些测试函数的地址，主要是通过注册函数，就是把测试函数的地址依次写进这块存储区，具体代码
+RUN_ALL_TESTS简单实现的就是先开辟一块内存，用来存放这些测试函数的地址，然后通过注册函数，就是把测试函数的地址依次写进这块存储区，具体代码实现，着重理解一下
 ```c++
 __attribute__((constructor)) \
 void reg_##a##_##b() { \
