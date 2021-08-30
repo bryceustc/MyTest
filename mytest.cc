@@ -17,6 +17,7 @@ int add (int a, int b) {
     return a + b;
 };
 // add something
+//  add 2
 TEST(test, add1) {
     EXPECT_EQ(add(3, 4), 7); // ==
     EXPECT_NE(add(3, 4), 9); // !=
