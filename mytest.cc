@@ -7,6 +7,8 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
+#include <string>
 #include "zdy/mytest.h"
 
 using namespace std;
